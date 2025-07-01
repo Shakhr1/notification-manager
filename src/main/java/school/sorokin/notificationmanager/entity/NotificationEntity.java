@@ -1,20 +1,14 @@
 package school.sorokin.notificationmanager.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
 @Table(name = "notifications")
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
+@Data
 public class NotificationEntity {
 
     @Id

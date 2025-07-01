@@ -3,6 +3,7 @@ package school.sorokin.notificationmanager.service;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import school.sorokin.notificationmanager.mapper.NotificationEntityMapper;
 import school.sorokin.notificationmanager.model.EventNotification;
 import school.sorokin.notificationmanager.repository.NotificationRepository;
@@ -22,11 +23,9 @@ public class NotificationService {
         notificationRepository.save(notificationEntityMapper.toEntity(notification));
     }
 
+    @Transactional
     public void markAsRead(List<Long> id) {
-        notificationRepository.findAllByIdIn(id).forEach(notification -> {
-            notification.setIsRead(true);
-            notificationRepository.save(notification);
-        });
+        notificationRepository.findAllByIdIn(id).forEach(notification -> notification.setIsRead(true));
         log.info("Marking notification as read: {}", id);
     }
 
