@@ -14,10 +14,9 @@ import school.sorokin.notificationmanager.service.NotificationService;
 public class EventNotificationConsumer {
     private final NotificationService notificationService;
 
-    @KafkaListener(topics = "notification-topic", containerFactory = "containerFactory")
+    @KafkaListener(topics = "${kafka.topic.event-updates}", containerFactory = "containerFactory")
     public void listenEvents(ConsumerRecord<Long, EventNotification> record) {
-        var eventNotification = record.value();
-        log.info("Received event notification: {}", eventNotification);
-        notificationService.saveNotification(eventNotification);
+        log.info("Received event notification: {}", record.value());
+        notificationService.saveNotification(record.value());
     }
 }

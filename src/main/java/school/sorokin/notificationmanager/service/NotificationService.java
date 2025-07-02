@@ -18,6 +18,7 @@ public class NotificationService {
     private final NotificationRepository notificationRepository;
     private final NotificationEntityMapper notificationEntityMapper;
 
+    @Transactional
     public void saveNotification(EventNotification notification) {
         log.info("Saving notification: {}", notification);
         notificationRepository.save(notificationEntityMapper.toEntity(notification));
